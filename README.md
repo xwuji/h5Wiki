@@ -1,5 +1,5 @@
-## H5项目常见问题及注意事项
-```
+## H5项目的经验总结和常见问题
+```js
 //有问必答社区，志同道合来
 console This
 <script>
@@ -12,11 +12,9 @@ let   js = mima.split("2017~").reverse().join("");//will you?
 })("friends")
 </script>
 ```
-#### Meta基础知识：
-H5页面窗口自动调整到设备宽度，并禁止用户缩放页面
-
-```
-//一、HTML页面结构
+### Meta基础知识：
+#### H5页面窗口自动调整到设备宽度，并禁止用户缩放页面
+```html
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 // width    设置viewport宽度，为一个正整数，或字符串‘device-width’
 // height   设置viewport高度，一般设置了宽度，会自动解析出高度，可以不用设置
@@ -24,8 +22,10 @@ H5页面窗口自动调整到设备宽度，并禁止用户缩放页面
 // minimum-scale    允许用户最小缩放比例，为一个数字，可以带小数
 // maximum-scale    允许用户最大缩放比例，为一个数字，可以带小数
 // user-scalable    是否允许手动缩放
+```
 
-//二、JS动态判断
+#### JS动态判断
+```js
 var phoneWidth =  parseInt(window.screen.width);
 var phoneScale = phoneWidth/640;
 var ua = navigator.userAgent;
@@ -41,9 +41,9 @@ if (/Android (\d+\.\d+)/.test(ua)){
 }
 ```
 
-H5空白页基本meta标签
+#### H5空白页基本meta标签
 
-```
+```html
 <!-- 设置缩放 -->
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui" />
 <!-- 可隐藏地址栏，仅针对IOS的Safari（注：IOS7.0版本以后，safari上已看不到效果） -->
@@ -55,9 +55,9 @@ H5空白页基本meta标签
 ```
 
 
-PC端基础meta标签
+#### PC端基础meta标签
 
-```
+```html
 <!-- 页面关键词-->
 <meta name="keywords" content="your tags" />
 <!-- 页面描述-->
@@ -79,9 +79,9 @@ PC端基础meta标签
 
 
 
-页面缓存设置
+#### 页面缓存设置
 
-```
+```html
 <!-- 清除缓存 -->
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -89,9 +89,9 @@ PC端基础meta标签
 ```
 
 
-其他meta标签
+#### 其他meta标签
 
-```
+```html
 <!-- 启用360浏览器的极速模式(webkit) -->
 <meta name="renderer" content="webkit">
 <!-- 避免IE使用兼容模式 -->
@@ -121,11 +121,11 @@ PC端基础meta标签
 <meta name="verify" content="index,follow" />
 ```
 
-#### 常见问题：
-移动端如何定义字体font-family
+### 常见问题：
+#### 移动端如何定义字体font-family
 
-```
-@ --------------------------------------中文字体的英文名称
+```css
+@ 中文字体的英文名称
 @ 宋体      SimSun
 @ 黑体      SimHei
 @ 微信雅黑   Microsoft Yahei
@@ -138,15 +138,14 @@ PC端基础meta标签
 @ 楷体     KaiTi
 @ 仿宋_GB2312  FangSong_GB2312
 @ 楷体_GB2312  KaiTi_GB2312  
-@
-@ 说明：中文字体多数使用宋体、雅黑，英文用Helvetica
+@ 中文字体多数使用宋体、雅黑，英文用Helvetica
 
 body { font-family: Microsoft Yahei,SimSun,Helvetica; }
 ```
 
-打电话发短信写邮件怎么实现
+#### 打电话发短信写邮件怎么实现
 
-```
+```html
 // 一、打电话
 <a href="tel:0755-10086">打电话给:0755-10086</a>
 
@@ -175,7 +174,7 @@ body { font-family: Microsoft Yahei,SimSun,Helvetica; }
 <a href="mailto:863139978@qq.com;384900096@qq.com?cc=zhangqian0406@yeah.net&bcc=993233461@qq.com&subject=[邮件主题]&body=腾讯诚邀您参与%0A%0Ahttp://www.baidu.com%0A%0A<img src='images/1.jpg' />">点击我发邮件</a>
 ```
 
-移动端touch事件（区分webkit和winphone）
+#### 移动端touch事件（区分webkit和winphone）
 
 ```
 /* 当用户手指放在移动设备在屏幕上滑动会触发的touch事件 */
@@ -205,7 +204,7 @@ MSPointerUp——当手指离开屏幕时触发
 ```
 
 
-移动端click屏幕产生200-300ms的延时响应
+#### 移动端click屏幕产生200-300ms的延时响应
 
 ```
 说明：移动设备上的web网页是有300ms延迟的，玩玩会造成按钮点击延迟甚至是点击失效。
@@ -220,10 +219,11 @@ MSPointerUp——当手指离开屏幕时触发
 //解决方案：
 fastclick可以解决在手机上点击事件的300ms延迟
 zepto的touch模块，tap事件也是为了解决在click的延迟问题
+
 ```
 
 
-Rentina显示屏原理及设计方案
+#### Rentina显示屏原理及设计方案
 
 ```
 说明：retina屏是一种具备超高像素密度的液晶屏，同样大小的屏幕上显示的像素点由1个变为多个，如在同样带下的屏幕上，苹果设备的retina显示屏中，像素点1个变为4个。
@@ -245,7 +245,7 @@ image-set,webkit私有属性，也是CSS4的属性，为解决Rentina屏幕下�
 }
 ```
 
-点击元素产生背景或边框怎么去掉
+#### 点击元素产生背景或边框怎么去掉
 
 ```
 //ios用户点击一个链接，会出现一个半透明灰色遮罩, 如果想要禁用，可设置-webkit-tap-highlight-color的alpha值为0去除灰色半透明遮罩；
@@ -263,7 +263,7 @@ a,button,input,textarea {
 ```
 
 
-美化表单元素
+#### 美化表单元素
 
 ```
 //一、使用appearance改变webkit浏览器的默认外观
@@ -283,7 +283,7 @@ input[type=tel]::-ms-clear,
 input[type=number]::-ms-clear { display:none; }
 ```
 
-移动端字体单位font-size选择px还是rem
+#### 移动端字体单位font-size选择px还是rem
 
 ```
 // 如需适配多种移动设备，建议使用rem。以下为参考值：
@@ -293,7 +293,7 @@ body { font-size:12px; font-size:1.2rem; }
 ```
  
 
-超实用的CSS样式
+#### 超实用的CSS样式
 
 ```
 //去掉webkit的滚动条——display: none;
@@ -332,22 +332,22 @@ html { -ms-touch-action:none; } //禁止winphone默认触摸事件
 ```
 
 
-取消input在ios下，输入的时候英文首字母的默认大写
+#### 取消input在ios下，输入的时候英文首字母的默认大写
 
-```
+```html
 <input autocapitalize="off" autocorrect="off" />
 ```
 
-手机拍照和上传图片
+#### 手机拍照和上传图片
 //IOS有拍照、录像、选取本地图片功能，部分Android只有选择本地图片功能。Winphone不支持
 
-```
+```html
 <input type="file" accept="images/*" />
 <input type="file" accept="video/*" />
 ```
 
 
-屏幕旋转的事件和样式
+#### 屏幕旋转的事件和样式
 
 ```
 //JS处理
@@ -372,7 +372,7 @@ window.addEventListener('onorientationchange' in window?'orientationchange':'res
 ```
 
 
- audio元素和video元素在ios和andriod中无法自动播放
+#### audio元素和video元素在ios和andriod中无法自动播放
 
 ```
 //音频，写法一
@@ -401,9 +401,9 @@ document.addEventListener("WeixinJSBridgeReady", function () {
 ```
 
 
-重力感应事件
+#### 重力感应事件
 
-```
+```js
 // 运用HTML5的deviceMotion，调用重力感应事件
 if(window.DeviceMotionEvent){
     document.addEventListener('devicemotion', deviceMotionHandler, false)
@@ -433,9 +433,9 @@ function yaoAfter(){
 ```
 
 
-微信浏览器用户调整字体大小后页面矬了，怎么阻止用户调整
+#### 微信浏览器用户调整字体大小后页面矬了，怎么阻止用户调整
 
-```
+```js
 //以下代码可使Android机页面不再受用户字体缩放强制改变大小，但是会有1S左右延时，期间可以考虑loading来处理
 if (typeof(WeixinJSBridge) == "undefined") {
     document.addEventListener("WeixinJSBridgeReady", function (e) {
@@ -460,9 +460,9 @@ body { -webkit-text-size-adjust:100%!important; }
 ```
 
 
-定位的坑
+#### 定位的坑
 
-```
+```js
 //fixed定位
 //1.ios下fixed元素容易定位出错，软键盘弹出时，影响fixed元素定位
 //2.android下fixed表现要比iOS更好，软键盘弹出时，不会影响fixed元素定位
@@ -497,9 +497,9 @@ if(ua>-1){
 }
 ```
 
-播放视频不全屏
+#### 播放视频不全屏
 
-```
+```html
 <!--
 1.ios7+支持自动播放
 2.支持Airplay的设备（如：音箱、Apple TV)播放
@@ -510,9 +510,9 @@ webkit-playsinline="true"
 <video x-webkit-airplay="true" webkit-playsinline="true" preload="auto" autoplay src="http://"></video>
 ```
 
-JS判断设备
+#### JS判断设备
 
-```
+```js
 function deviceType(){
     var ua = navigator.userAgent;
     var agent = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];    
@@ -528,9 +528,9 @@ window.addEventListener('resize', function(){
 })
 ```
 
-JS判断微信浏览器
+#### JS判断微信浏览器
 
-```
+```js
 function isWeixin(){
     var ua = navigator.userAgent.toLowerCase();
     if(ua.match(/MicroMessenger/i)=='micromessenger'){
@@ -561,9 +561,9 @@ android 2.3 bug
 ```
 
 
-消除transition闪屏
+#### 消除transition闪屏
 
-```
+```css
 .css {
     -webkit-transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
@@ -571,9 +571,9 @@ android 2.3 bug
 }
 ```
 
- 开启硬件加速
+#### 开启硬件加速
 
-```
+``` css
 //目前，像Chrome/Filefox/Safari/IE9+以及最新版本Opera都支持硬件加速，当检测到某个DOM元素应用了某些CSS规则时就会自动开启，从而解决页面闪白，保证动画流畅。
 .css {
     -webkit-transform: translate3d(0,0,0);
@@ -583,7 +583,7 @@ android 2.3 bug
 }
 ```
 
- 渲染优化
+#### 渲染优化
 
 ```
 //1.禁止使用iframe（阻塞父文档onload事件）
@@ -597,9 +597,9 @@ android 2.3 bug
     //3.修改及时生效；
 ```
 
-腾讯方案
+#### 腾讯方案
 
-```
+``` js
 var autoScale = function(){
     var ratio = 320/504,   //这是设计稿的宽高比（504是Iphone的高度去掉标题栏高度）
         winW = document.getElement.clientWidth,
@@ -635,15 +635,3 @@ function detectOrientatioin(){
 }
 ```
 
-```
-//有问必答社区，懂得人来
-<script>
-(function(name){
-let uname = name || "";
-let come = unescape("%u963F%u91CC%u4EBA%u521B%u5EFA%u7684%u524D%u7AEF%u5171%u4EAB%u5C0F%u7FA4%2Cwill%20join%20us%3F");
-let mima = "62017~72017~32017~12017~42017~42017~62017~52017~5";
-let   js = mima.split("2017~").reverse().join("");//will you?
-    return come+" "+uname+" come on~ "+js;
-})("friends")
-</script>
-```
